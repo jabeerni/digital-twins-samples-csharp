@@ -5,6 +5,12 @@
 		},
 		{
 			"path": "device-connectivity"
+		},
+		{
+			"path": "topology-loader"
+		},
+		{
+			"path": "topology-export"
 		}
 	],
 	"settings": {}

@@ -1,8 +1,8 @@
-# Topology Loader
+# Topology Export
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT) [![Contribute](https://img.shields.io/badge/PR%27s-welcome-brightgreen.svg)](../CONTRIBUTING.md)
 
-Sample code to load a topology into a Digital Twins instance via management APIs from a YAML file.
+Sample code to export all nodes in a Digital Twins topology via management APIs and outputs the data to a YAML file which can then be used to upload the data into another instance of Digital Twins
 
 ## Build and Run the Sample
 
@@ -35,7 +35,7 @@ Below are some details on how to get up and running.  For a more detailed walkth
 
 ### Use Visual Studio Code
 
-1. Open the 'toplogy-loader' folder in Visual Studio Code.
+1. Open the 'topology-export' folder in Visual Studio Code.
 1. Run the app by using the `F5` key. You can change the command-line parameters in `launch.json`.
 1. To build and run tests use the 'Run Task' command in Visual Studio Code and choose `test`.
 
