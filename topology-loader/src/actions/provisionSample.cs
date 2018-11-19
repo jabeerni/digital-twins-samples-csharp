@@ -16,12 +16,12 @@ namespace Microsoft.Azure.DigitalTwins.Samples
 {
     public static partial class Actions
     {
-        public static async Task<IEnumerable<ProvisionResults.Space>> ProvisionSample(HttpClient httpClient, ILogger logger)
+        public static async Task<IEnumerable<ProvisionResults.Space>> ProvisionSample(HttpClient httpClient, ILogger logger, string fileName)
         {
             IEnumerable<SpaceDescription> spaceCreateDescriptions;
-            using (var r = new StreamReader("actions/provisionSample.yaml"))
+            using (var r = new StreamReader(fileName))
             {
-                spaceCreateDescriptions = await GetProvisionSampleTopology(r);
+                spaceCreateDescriptions = await GetTopology(r);
             }
 
             var results = await CreateSpaces(httpClient, logger, spaceCreateDescriptions, Guid.Empty);
@@ -31,7 +31,7 @@ namespace Microsoft.Azure.DigitalTwins.Samples
             return results;
         }
 
-        public static async Task<IEnumerable<SpaceDescription>> GetProvisionSampleTopology(TextReader textReader)
+        public static async Task<IEnumerable<SpaceDescription>> GetTopology(TextReader textReader)
             => new Deserializer().Deserialize<IEnumerable<SpaceDescription>>(await textReader.ReadToEndAsync());
 
         public static async Task<IEnumerable<ProvisionResults.Space>> CreateSpaces(
@@ -47,7 +47,7 @@ namespace Microsoft.Azure.DigitalTwins.Samples
 
                 if (spaceId != Guid.Empty)
                 {
-                    // This must happen before devices (or anyhting that could have devices like other spaces)
+                    // This must happen before devices (or anything that could have devices like other spaces)
                     // or the device create will fail because a resource is required on an ancestor space
                     if (description.resources != null)
                         await CreateResources(httpClient, logger, description.resources, spaceId);

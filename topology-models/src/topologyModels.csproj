@@ -21,8 +21,4 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\..\topology-models\src\topologyModels.csproj" />
-  </ItemGroup>
 </Project>

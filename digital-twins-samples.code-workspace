@@ -11,6 +11,9 @@
 		},
 		{
 			"path": "topology-export"
+		},
+		{
+			"path": "topology-models"
 		}
 	],
 	"settings": {}

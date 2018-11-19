@@ -32,27 +32,11 @@ namespace Microsoft.Azure.DigitalTwins.Samples
 
                 switch (actionName)
                 {
-                    case ActionName.CreateEndpoints:
-                        await Actions.CreateEndpoints(await SetupHttpClient(Loggers.ConsoleLogger, appSettings), Loggers.ConsoleLogger);
+                   case ActionName.GetSpaces:
+                        var outputFileName = GetFileName(args);
+                        await Actions.GetSpaces(await SetupHttpClient(Loggers.ConsoleLogger, appSettings), Loggers.ConsoleLogger, fileName);
                         break;
-                    case ActionName.CreateRoleAssignments:
-                        await Actions.CreateRoleAssignments(await SetupHttpClient(Loggers.ConsoleLogger, appSettings), Loggers.ConsoleLogger);
-                        break;
-                    case ActionName.GetAvailableAndFreshSpaces:
-                        await Actions.GetAvailableAndFreshSpaces(await SetupHttpClient(Loggers.SilentLogger, appSettings));
-                        break;
-                    case ActionName.GetOntologies:
-                        await Api.GetOntologies(await SetupHttpClient(Loggers.ConsoleLogger, appSettings), Loggers.ConsoleLogger);
-                        break;
-                    case ActionName.GetSpaces:
-                        await Actions.GetSpaces(await SetupHttpClient(Loggers.ConsoleLogger, appSettings), Loggers.ConsoleLogger);
-                        break;
-                    case ActionName.ProvisionSample:       
-                        var fileName = GetInputFileName(args);                 
-                        await Actions.ProvisionSample(await SetupHttpClient(Loggers.ConsoleLogger, appSettings), Loggers.ConsoleLogger, fileName);
-                        break;
-
-                    default:
+                   default:
                         throw new NotImplementedException();
                 }
             }
@@ -85,7 +69,7 @@ namespace Microsoft.Azure.DigitalTwins.Samples
             // If a file name is not passed in, use the default sample
             if (args.Length < 2)
             {
-                return "actions/provisionSample.yaml";
+                return $"outputTopology-{DateTime.Now.ToString("yyyyMMddhhmmss")}.yaml";
             }
             else
             {
