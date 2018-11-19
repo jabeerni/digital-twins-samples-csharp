@@ -1,0 +1,44 @@
+- name: Quickstart Building
+  type: Venue
+  resources:
+  - type: IoTHub
+  spaces:
+  - name: Floor 1
+    type: Floor
+    spaces:
+    - name: Area A
+      type: Area
+    - name: Conference Room 11
+      type: Room
+      subType: ConferenceRoom
+    - name: Focus Room A1
+      type: Room
+      subType: FocusRoom
+      devices:
+      - name: Raspberry Pi 3 A1
+        hardwareId: 1234567890AB
+        sensors:
+        - dataType: Motion
+          hardwareId: SAMPLE_SENSOR_MOTION
+        - dataType: CarbonDioxide
+          hardwareId: SAMPLE_SENSOR_CARBONDIOXIDE
+#        - dataType: Temperature
+#          hardwareId: SAMPLE_SENSOR_TEMPERATURE
+      matchers:
+      - name: Matcher Motion A1
+        dataTypeValue: Motion
+      - name: Matcher CarbonDioxide A1
+        dataTypeValue: CarbonDioxide
+#      - name: Matcher Temperature
+#        dataTypeValue: Temperature
+      userdefinedfunctions:
+      - name: Motion Processor
+        matcherNames:
+        - Matcher Motion A1
+        - Matcher CarbonDioxide A1
+#        - Matcher Temperature
+        script: actions/userDefinedFunctions/availability.js
+      roleassignments:
+      - roleId: 98e44ad7-28d4-4007-853b-b9968ad132d1 # System Role: SpaceAdministrator
+        objectName: Motion Processor
+        objectIdType: UserDefinedFunctionId
